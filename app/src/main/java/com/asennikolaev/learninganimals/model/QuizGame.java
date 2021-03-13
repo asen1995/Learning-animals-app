@@ -37,7 +37,7 @@ public class QuizGame {
 
         }
 
-        Collections.shuffle(quizModelList);
+        Collections.shuffle(quizModelList);//random order everytime
 
 
 

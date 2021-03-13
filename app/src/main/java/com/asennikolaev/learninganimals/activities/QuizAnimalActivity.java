@@ -1,4 +1,4 @@
-package com.asennikolaev.learninganimals;
+package com.asennikolaev.learninganimals.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
 
