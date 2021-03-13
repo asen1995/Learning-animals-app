@@ -42,7 +42,11 @@ public class Generator {
     }
 
     public static Integer generateCorrectAnswerId(int range) {
-       return new Random(range).nextInt();
+        Integer i = new Random().nextInt(range);
+        if(i == 0){
+            i = generateCorrectAnswerId(range);
+        }
+        return i;
     }
 
 }
