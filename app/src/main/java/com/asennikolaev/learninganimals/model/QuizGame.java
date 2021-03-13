@@ -1,5 +1,7 @@
 package com.asennikolaev.learninganimals.model;
 
+import android.util.Log;
+
 import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.utils.AppConstants;
 import com.asennikolaev.learninganimals.utils.Generator;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static android.content.ContentValues.TAG;
 import static com.asennikolaev.learninganimals.model.ImageResources.imageAnswerMap;
 
 public class QuizGame {
@@ -20,6 +23,8 @@ public class QuizGame {
         quizModelList = new ArrayList();
 
         ImageResources.initImages();
+        Log.i(TAG, "MyClass.getView() — get item number " + 5);
+
         List<Integer> listImages = new ArrayList(imageAnswerMap.keySet());
 
         for (Integer imageId: listImages

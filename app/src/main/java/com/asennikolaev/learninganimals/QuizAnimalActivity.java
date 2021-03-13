@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -11,6 +12,8 @@ import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class QuizAnimalActivity extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
         buttonAnswer3 = (Button) findViewById(R.id.buttonAnswer3);
         buttonAnswer4 = (Button) findViewById(R.id.buttonAnswer4);
 
-        imageViewQuestion.setImageResource(R.drawable.bunny);//set image
+        imageViewQuestion.setImageResource(R.drawable.deer);//set image
 
         System.out.println("initQuizScreenComponents completed");
     }
@@ -38,18 +41,20 @@ public class QuizAnimalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_quiz_animal);
         initQuizScreenComponents();
-
+        Log.i(TAG, "initQuizScreenComponents finished");
         QuizGame.initializeNewGame();
 
-        setContentView(R.layout.activity_quiz_animal);
+        Log.i(TAG, "initializeNewGame finished");
+
 
         playGame();
     }
 
     private void playGame() {
 
-        QuizModel quizModel = QuizGame.quizModelList.get(0);
+        QuizModel quizModel = QuizGame.quizModelList.get(2);
 
         imageViewQuestion.setImageResource(quizModel.getDrawableImageId());
 
