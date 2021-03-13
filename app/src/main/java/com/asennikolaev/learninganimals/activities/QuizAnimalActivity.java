@@ -116,6 +116,9 @@ public class QuizAnimalActivity extends AppCompatActivity {
             String buttonText = b.getText().toString();
 
             if(isCorrectAnswer(buttonText)){
+
+                soundSystem.playCorrectAnswerSound();
+
                 Toast.makeText(getApplicationContext(), "correct " + buttonText, Toast.LENGTH_SHORT).show();
                 b.setBackgroundColor(Color.GREEN);
                 quizNumber++;
