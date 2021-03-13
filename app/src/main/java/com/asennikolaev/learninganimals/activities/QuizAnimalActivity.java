@@ -114,14 +114,25 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "correct " + buttonText, Toast.LENGTH_SHORT).show();
                 b.setBackgroundColor(Color.GREEN);
                 quizNumber++;
-                ButtonHelperOperations.showButton(righArrorNextQuestion);
+                showAllButtons();
+
+               
 
             }else{
                 b.setBackgroundColor(Color.RED);
                 Toast.makeText(getApplicationContext(), "incorrect " + buttonText, Toast.LENGTH_SHORT).show();
+                ButtonHelperOperations.hideButton(b);
             }
         }
     };
+
+    private void showAllButtons() {
+        ButtonHelperOperations.showButton(righArrorNextQuestion);
+        ButtonHelperOperations.showButton(buttonAnswer1);
+        ButtonHelperOperations.showButton(buttonAnswer2);
+        ButtonHelperOperations.showButton(buttonAnswer3);
+        ButtonHelperOperations.showButton(buttonAnswer4);
+    }
 
     private View.OnClickListener arrowButtonNextQuestionListener = new View.OnClickListener() {
         public void onClick(View v) {
