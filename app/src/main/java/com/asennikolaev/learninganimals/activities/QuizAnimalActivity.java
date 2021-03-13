@@ -2,6 +2,7 @@ package com.asennikolaev.learninganimals.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
+import com.asennikolaev.learninganimals.score.QuizScore;
 import com.asennikolaev.learninganimals.sound.SoundManager;
 import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
 
@@ -37,7 +39,11 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private Button righArrorNextQuestion;
 
 
-    SoundManager soundSystem;
+    private SoundManager soundSystem;
+    private QuizScore quizScore;
+
+    private boolean correctAnswer;
+    private boolean firstAnswer;
 
     private void initQuizScreenComponents() {
 
@@ -70,6 +76,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
         Log.i(TAG, "initQuizScreenComponents finished");
 
         soundSystem = new SoundManager(getApplicationContext());
+        quizScore = new QuizScore();
 
         QuizGame.initializeNewGame();
 
@@ -83,6 +90,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         currentQuiz = QuizGame.quizModelList.get(0);//first question in the list
 
+        firstAnswer = true;
         prepareQuestion(currentQuiz);
         quizNumber = 0;
 
@@ -97,6 +105,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
         buttonAnswer3.setText(currentQuiz.getAnswer3());
         buttonAnswer4.setText(currentQuiz.getAnswer4());
 
+        firstAnswer = true;
     }
 
     private void initClickActions() {
@@ -117,6 +126,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
             if(waitingToMoveToNextQuestion()){
                 return;
             }
+
             Button b = (Button) v;
             String buttonText = b.getText().toString();
 
@@ -128,11 +138,28 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 quizNumber++;
                 showAllButtons();
 
+                if(firstAnswer) {
+                    quizScore.correctAnswer();
+                    quizScore.getCorrectAnswersList().add(currentQuiz.getCorrectAnswer());
+                    firstAnswer = false;
+                }
+
+
             }else{
                 soundSystem.playBuzzerd();
                 b.setBackgroundColor(Color.RED);
                 ButtonHelperOperations.hideButton(b);
+
+                if(firstAnswer) {
+                    quizScore.incorrectAnswer();
+                    quizScore.getIncorrectAnswersList().add(currentQuiz.getCorrectAnswer());
+                    firstAnswer = false;
+                }
+
             }
+
+
+
         }
     };
 
@@ -151,18 +178,28 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private View.OnClickListener arrowButtonNextQuestionListener = new View.OnClickListener() {
         public void onClick(View v) {
 
-            currentQuiz = QuizGame.quizModelList.get(quizNumber);
-            prepareQuestion(currentQuiz);
 
-            buttonAnswer1.setBackgroundColor(Color.LTGRAY);
-            buttonAnswer2.setBackgroundColor(Color.LTGRAY);
-            buttonAnswer3.setBackgroundColor(Color.LTGRAY);
-            buttonAnswer4.setBackgroundColor(Color.LTGRAY);
+            if(quizNumber > QuizGame.quizModelList.size() - 1){//end of the game
+                goToScoringScreen();
 
-            ButtonHelperOperations.hideButton(righArrorNextQuestion);
+            }else {
+                currentQuiz = QuizGame.quizModelList.get(quizNumber);
+                prepareQuestion(currentQuiz);
+
+                buttonAnswer1.setBackgroundColor(Color.LTGRAY);
+                buttonAnswer2.setBackgroundColor(Color.LTGRAY);
+                buttonAnswer3.setBackgroundColor(Color.LTGRAY);
+                buttonAnswer4.setBackgroundColor(Color.LTGRAY);
+
+                ButtonHelperOperations.hideButton(righArrorNextQuestion);
+            }
 
         }
     };
+
+    private void goToScoringScreen() {
+        startActivity(new Intent(QuizAnimalActivity.this, ScoreActivity.class));
+    }
 
     private boolean isCorrectAnswer(String buttonText) {
        return  buttonText.equalsIgnoreCase(currentQuiz.getCorrectAnswer());

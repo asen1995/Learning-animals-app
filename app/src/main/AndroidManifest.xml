@@ -30,6 +30,11 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".activities.ScoreActivity">
+
+        </activity>
+
     </application>
 
 </manifest>
