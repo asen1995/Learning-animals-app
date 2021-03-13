@@ -7,6 +7,7 @@ import com.asennikolaev.learninganimals.utils.AppConstants;
 import com.asennikolaev.learninganimals.utils.Generator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class QuizGame {
 
         }
 
+        Collections.shuffle(quizModelList);
 
 
 
