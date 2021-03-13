@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.asennikolaev.learninganimals.model.QuizGame;
+import com.asennikolaev.learninganimals.model.QuizModel;
+
+import java.util.List;
+
 public class QuizAnimalActivity extends AppCompatActivity {
 
     private ImageView imageViewQuestion;
@@ -15,16 +20,6 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private Button buttonAnswer2;
     private Button buttonAnswer3;
     private Button buttonAnswer4;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_animal);
-
-
-        initQuizScreenComponents();
-    }
 
     private void initQuizScreenComponents() {
 
@@ -38,4 +33,33 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         System.out.println("initQuizScreenComponents completed");
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        initQuizScreenComponents();
+
+        QuizGame.initializeNewGame();
+
+        setContentView(R.layout.activity_quiz_animal);
+
+        playGame();
+    }
+
+    private void playGame() {
+
+        QuizModel quizModel = QuizGame.quizModelList.get(0);
+
+        imageViewQuestion.setImageResource(quizModel.getDrawableImageId());
+
+        buttonAnswer1.setText(quizModel.getAnswer1());
+        buttonAnswer2.setText(quizModel.getAnswer2());
+        buttonAnswer3.setText(quizModel.getAnswer3());
+        buttonAnswer4.setText(quizModel.getAnswer4());
+
+
+    }
+
+
 }
