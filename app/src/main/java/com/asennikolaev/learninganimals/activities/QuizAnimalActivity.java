@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
+import com.asennikolaev.learninganimals.sound.SoundManager;
 import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private Button righArrorNextQuestion;
 
+
+    SoundManager soundSystem;
 
     private void initQuizScreenComponents() {
 
@@ -65,6 +68,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
         initQuizScreenComponents();
 
         Log.i(TAG, "initQuizScreenComponents finished");
+
+        soundSystem = new SoundManager(getApplicationContext());
 
         QuizGame.initializeNewGame();
 
@@ -116,9 +121,11 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 quizNumber++;
                 showAllButtons();
 
-               
+
 
             }else{
+
+                soundSystem.playBuzzerd();
                 b.setBackgroundColor(Color.RED);
                 Toast.makeText(getApplicationContext(), "incorrect " + buttonText, Toast.LENGTH_SHORT).show();
                 ButtonHelperOperations.hideButton(b);
