@@ -2,11 +2,14 @@ package com.asennikolaev.learninganimals;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
@@ -18,6 +21,9 @@ import static android.content.ContentValues.TAG;
 public class QuizAnimalActivity extends AppCompatActivity {
 
     private ImageView imageViewQuestion;
+
+    private QuizModel currentQuiz;
+    private Integer quizPassed;
 
     private Button buttonAnswer1;
     private Button buttonAnswer2;
@@ -34,8 +40,11 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         imageViewQuestion.setImageResource(R.drawable.deer);//set image
 
+        initClickActions();
+
         System.out.println("initQuizScreenComponents completed");
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,9 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_quiz_animal);
         initQuizScreenComponents();
+
         Log.i(TAG, "initQuizScreenComponents finished");
+
         QuizGame.initializeNewGame();
 
         Log.i(TAG, "initializeNewGame finished");
@@ -54,16 +65,50 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private void playGame() {
 
-        QuizModel quizModel = QuizGame.quizModelList.get(0);
+        currentQuiz = QuizGame.quizModelList.get(0);
 
-        imageViewQuestion.setImageResource(quizModel.getDrawableImageId());
+        prepareQuestion(currentQuiz);
+        quizPassed = 0;
 
-        buttonAnswer1.setText(quizModel.getAnswer1());
-        buttonAnswer2.setText(quizModel.getAnswer2());
-        buttonAnswer3.setText(quizModel.getAnswer3());
-        buttonAnswer4.setText(quizModel.getAnswer4());
+    }
 
+    private void prepareQuestion(QuizModel currentQuiz) {
 
+        imageViewQuestion.setImageResource(currentQuiz.getDrawableImageId());
+
+        buttonAnswer1.setText(currentQuiz.getAnswer1());
+        buttonAnswer2.setText(currentQuiz.getAnswer2());
+        buttonAnswer3.setText(currentQuiz.getAnswer3());
+        buttonAnswer4.setText(currentQuiz.getAnswer4());
+
+    }
+
+    private void initClickActions() {
+
+        buttonAnswer1.setOnClickListener(buttonsListener);
+        buttonAnswer2.setOnClickListener(buttonsListener);
+        buttonAnswer3.setOnClickListener(buttonsListener);
+        buttonAnswer4.setOnClickListener(buttonsListener);
+
+    }
+
+    private View.OnClickListener buttonsListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Button b = (Button) v;
+            String buttonText = b.getText().toString();
+
+            if(isCorrectAnswer(buttonText)){
+                Toast.makeText(getApplicationContext(), "correct " + buttonText, Toast.LENGTH_SHORT).show();
+                b.setBackgroundColor(Color.GREEN);
+            }else{
+                b.setBackgroundColor(Color.RED);
+                Toast.makeText(getApplicationContext(), "incorrect " + buttonText, Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    private boolean isCorrectAnswer(String buttonText) {
+       return  buttonText.equalsIgnoreCase(currentQuiz.getCorrectAnswer());
     }
 
 
