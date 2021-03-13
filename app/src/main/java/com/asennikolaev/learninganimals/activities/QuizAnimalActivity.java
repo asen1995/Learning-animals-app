@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
+import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
 
 import java.util.List;
 
@@ -24,12 +25,16 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private ImageView imageViewQuestion;
 
     private QuizModel currentQuiz;
-    private Integer quizPassed;
+    private Integer quizNumber;
 
     private Button buttonAnswer1;
     private Button buttonAnswer2;
     private Button buttonAnswer3;
     private Button buttonAnswer4;
+
+
+    private Button righArrorNextQuestion;
+
 
     private void initQuizScreenComponents() {
 
@@ -39,12 +44,17 @@ public class QuizAnimalActivity extends AppCompatActivity {
         buttonAnswer3 = (Button) findViewById(R.id.buttonAnswer3);
         buttonAnswer4 = (Button) findViewById(R.id.buttonAnswer4);
 
+        righArrorNextQuestion = (Button) findViewById(R.id.buttonArrow);
+
+        ButtonHelperOperations.hideButton(righArrorNextQuestion);
+
         imageViewQuestion.setImageResource(R.drawable.deer);//set image
 
         initClickActions();
 
         System.out.println("initQuizScreenComponents completed");
     }
+
 
 
     @Override
@@ -69,7 +79,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
         currentQuiz = QuizGame.quizModelList.get(0);
 
         prepareQuestion(currentQuiz);
-        quizPassed = 0;
+        quizNumber = 0;
 
     }
 
@@ -91,6 +101,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
         buttonAnswer3.setOnClickListener(buttonsListener);
         buttonAnswer4.setOnClickListener(buttonsListener);
 
+        righArrorNextQuestion.setOnClickListener(arrowButtonNextQuestionListener);
+
     }
 
     private View.OnClickListener buttonsListener = new View.OnClickListener() {
@@ -101,6 +113,9 @@ public class QuizAnimalActivity extends AppCompatActivity {
             if(isCorrectAnswer(buttonText)){
                 Toast.makeText(getApplicationContext(), "correct " + buttonText, Toast.LENGTH_SHORT).show();
                 b.setBackgroundColor(Color.GREEN);
+                quizNumber++;
+                ButtonHelperOperations.showButton(righArrorNextQuestion);
+
             }else{
                 b.setBackgroundColor(Color.RED);
                 Toast.makeText(getApplicationContext(), "incorrect " + buttonText, Toast.LENGTH_SHORT).show();
@@ -108,9 +123,26 @@ public class QuizAnimalActivity extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener arrowButtonNextQuestionListener = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            currentQuiz = QuizGame.quizModelList.get(quizNumber);
+            prepareQuestion(currentQuiz);
+
+            buttonAnswer1.setBackgroundColor(Color.LTGRAY);
+            buttonAnswer2.setBackgroundColor(Color.LTGRAY);
+            buttonAnswer3.setBackgroundColor(Color.LTGRAY);
+            buttonAnswer4.setBackgroundColor(Color.LTGRAY);
+
+            ButtonHelperOperations.hideButton(righArrorNextQuestion);
+
+        }
+    };
+
     private boolean isCorrectAnswer(String buttonText) {
        return  buttonText.equalsIgnoreCase(currentQuiz.getCorrectAnswer());
     }
+
 
 
 }
