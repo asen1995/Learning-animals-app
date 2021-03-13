@@ -2,9 +2,10 @@ package com.asennikolaev.learninganimals.model;
 
 import com.asennikolaev.learninganimals.utils.Generator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import com.asennikolaev.learninganimals.R;
 import static com.asennikolaev.learninganimals.model.ImageResources.imageAnswerMap;
 
 public class QuizModel {
@@ -67,7 +68,7 @@ public class QuizModel {
 
     public void generateAnswers() {
 
-        List<Integer> randomNumbersPicked = Generator.generateNumbers(4, imageAnswerMap.keySet().size());
+        List<Integer> randomNumbersPicked = Generator.generateNumbers(4, imageAnswerMap.keySet(),drawableImageId);
 
         setAnswer1(imageAnswerMap.get(randomNumbersPicked.get(0)));
         setAnswer2(imageAnswerMap.get(randomNumbersPicked.get(1)));

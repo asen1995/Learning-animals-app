@@ -54,7 +54,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private void playGame() {
 
-        QuizModel quizModel = QuizGame.quizModelList.get(2);
+        QuizModel quizModel = QuizGame.quizModelList.get(0);
 
         imageViewQuestion.setImageResource(quizModel.getDrawableImageId());
 

@@ -3,21 +3,32 @@ package com.asennikolaev.learninganimals.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+
 
 public class Generator {
 
-    public static List<Integer> generateNumbers(int numberCountNeeded, int range) {
+    public static List<Integer> generateNumbers(int numberCountNeeded, Set<Integer> range, Integer correctDrawableImageId) {
 
         List<Integer> numbersList = new ArrayList<>();
 
-        Random random = new Random(range);
+        Random random = new Random();
+
+
+        List<Integer> keys = new ArrayList(range);
+
 
         while(numbersList.size() != numberCountNeeded){
 
-            int randomNumber = random.nextInt();
+            int rangeNumber = random.nextInt(range.size()); //5
 
-            if(dontContainNumber(numbersList,randomNumber)){
-                numbersList.add(randomNumber);
+            Integer keyOfImage = keys.get(rangeNumber);
+
+            if(dontContainNumber(numbersList,keyOfImage)){
+
+                if(keyOfImage != correctDrawableImageId) {
+                    numbersList.add(keyOfImage);
+                }
             }
 
         }
