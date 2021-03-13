@@ -81,7 +81,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private void playGame() {
 
-        currentQuiz = QuizGame.quizModelList.get(0);
+        currentQuiz = QuizGame.quizModelList.get(0);//first question in the list
 
         prepareQuestion(currentQuiz);
         quizNumber = 0;
@@ -112,6 +112,11 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private View.OnClickListener buttonsListener = new View.OnClickListener() {
         public void onClick(View v) {
+
+
+            if(waitingToMoveToNextQuestion()){
+                return;
+            }
             Button b = (Button) v;
             String buttonText = b.getText().toString();
 
@@ -119,22 +124,21 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
                 soundSystem.playCorrectAnswerSound();
 
-                Toast.makeText(getApplicationContext(), "correct " + buttonText, Toast.LENGTH_SHORT).show();
                 b.setBackgroundColor(Color.GREEN);
                 quizNumber++;
                 showAllButtons();
 
-
-
             }else{
-
                 soundSystem.playBuzzerd();
                 b.setBackgroundColor(Color.RED);
-                Toast.makeText(getApplicationContext(), "incorrect " + buttonText, Toast.LENGTH_SHORT).show();
                 ButtonHelperOperations.hideButton(b);
             }
         }
     };
+
+    private boolean waitingToMoveToNextQuestion() {
+        return righArrorNextQuestion.getVisibility() == View.VISIBLE;
+    }
 
     private void showAllButtons() {
         ButtonHelperOperations.showButton(righArrorNextQuestion);
