@@ -198,7 +198,10 @@ public class QuizAnimalActivity extends AppCompatActivity {
     };
 
     private void goToScoringScreen() {
-        startActivity(new Intent(QuizAnimalActivity.this, ScoreActivity.class));
+        Intent intent = new Intent(QuizAnimalActivity.this, ScoreActivity.class);
+        intent.putExtra("QuizScore", quizScore);
+
+        startActivity(intent);
     }
 
     private boolean isCorrectAnswer(String buttonText) {

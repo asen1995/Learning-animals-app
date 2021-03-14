@@ -1,9 +1,10 @@
 package com.asennikolaev.learninganimals.score;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizScore {
+public class QuizScore implements Serializable {
 
     private Integer correctAnswersCount;
     private List<String> correctAnswersList;
