@@ -33,11 +33,8 @@ public class ScoreActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         quizScore = (QuizScore) getIntent().getSerializableExtra("QuizScore");
-
-
         this.quizGame = QuizGame.quizModelList;
         Log.i("TAG","score is " + quizScore);
-
         setContentView(R.layout.activity_score);
 
         initQuizScreenComponents();
@@ -47,12 +44,12 @@ public class ScoreActivity  extends AppCompatActivity {
 
     private void initQuizScreenComponents() {
 
-//        correctAnswersCountTextView = (TextView) findViewById(R.id.correctAnswersCountTextView);
-////        incorrectAnswersCountTextView = (TextView) findViewById(R.id.incorrectAnswersCountTextView);
+        correctAnswersCountTextView = (TextView) findViewById(R.id.correctAnswersCountTextView);
+        incorrectAnswersCountTextView = (TextView) findViewById(R.id.incorrectAnswersCountTextView);
 
 
-//        correctAnswersCountTextView.setText("Correct answers: " + quizScore.getCorrectAnswersCount());
-//        incorrectAnswersCountTextView.setText("Incorrect answers: " + quizScore.getIncorrectAnswersCount());
+        correctAnswersCountTextView.setText("Correct answers: " + quizScore.getCorrectAnswersCount());
+        incorrectAnswersCountTextView.setText("Incorrect answers: " + quizScore.getIncorrectAnswersCount());
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

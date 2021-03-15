@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <!-- <TextView
+    <TextView
         android:id="@+id/incorrectAnswersCountTextView"
         android:layout_width="371dp"
         android:layout_height="30dp"
@@ -37,12 +37,12 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />-->
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="403dp"
-        android:layout_height="733dp"
+        android:layout_height="633dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="90dp"
