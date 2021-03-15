@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/animalNameTextView"
-        android:layout_width="188dp"
+        android:layout_width="158dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="138dp"
         android:layout_marginTop="48dp"
@@ -23,4 +23,15 @@
         android:layout_marginTop="4dp"
         android:layout_marginRight="98dp"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/checkOrXImageView"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginRight="98dp"
+        android:layout_marginLeft="328dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
 </FrameLayout>

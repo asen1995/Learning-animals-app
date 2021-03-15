@@ -21,17 +21,21 @@ public class ScoreRecyclerViewAdapter  extends RecyclerView.Adapter<ScoreRecycle
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView animalNameTextView;
         private final ImageView animalImage;
-
-
+        private final ImageView checkOrXImageView;
 
         public ViewHolder(View view) {
             super(view);
             animalNameTextView = (TextView) view.findViewById(R.id.animalNameTextView);
             animalImage= (ImageView) view.findViewById(R.id.animalImage);
+            checkOrXImageView= (ImageView) view.findViewById(R.id.checkOrXImageView);
         }
 
         public TextView getAnimalNameTextView() {
             return animalNameTextView;
+        }
+
+        public ImageView getCheckOrXImageView() {
+            return checkOrXImageView;
         }
 
         public ImageView getAnimalImage() {
@@ -63,8 +67,14 @@ public class ScoreRecyclerViewAdapter  extends RecyclerView.Adapter<ScoreRecycle
         Integer drawableImageId = quizModel.getDrawableImageId();
 
         Boolean answeredCorrectly = quizModel.getAnsweredCorrectly();
-        viewHolder.getAnimalNameTextView().setText(correctAnswer + " - " + answeredCorrectly);
+        viewHolder.getAnimalNameTextView().setText(correctAnswer);
         viewHolder.getAnimalImage().setImageResource(drawableImageId);
+
+        if(quizModel.getAnsweredCorrectly() == Boolean.TRUE){
+            viewHolder.getCheckOrXImageView().setImageResource(R.drawable.greencheck);
+        }else{
+            viewHolder.getCheckOrXImageView().setImageResource(R.drawable.redx);
+        }
     }
 
     @Override
