@@ -1,5 +1,6 @@
 package com.asennikolaev.learninganimals.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -40,6 +41,15 @@ public class ScoreActivity  extends AppCompatActivity {
         initQuizScreenComponents();
 
 
+    }
+
+    @Override
+        public void onBackPressed() {
+
+        Intent intent = new Intent(ScoreActivity.this, QuizAnimalActivity.class);
+        startActivity(intent);
+
+        finish();
     }
 
     private void initQuizScreenComponents() {

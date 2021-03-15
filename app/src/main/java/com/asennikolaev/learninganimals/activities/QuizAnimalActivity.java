@@ -204,6 +204,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
         intent.putExtra("QuizScore", quizScore);
 
         startActivity(intent);
+        finish();
     }
 
     private boolean isCorrectAnswer(String buttonText) {
@@ -211,5 +212,10 @@ public class QuizAnimalActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(QuizAnimalActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
