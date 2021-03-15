@@ -12,8 +12,10 @@
         android:layout_width="158dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="138dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="98dp"
+        android:textColor="@color/White"
+        android:textSize="35dp"
         android:text="text" />
 
     <ImageView
