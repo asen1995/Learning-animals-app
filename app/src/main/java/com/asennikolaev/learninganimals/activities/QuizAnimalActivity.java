@@ -142,6 +142,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
                     quizScore.correctAnswer();
                     quizScore.getCorrectAnswersList().add(currentQuiz.getCorrectAnswer());
                     firstAnswer = false;
+                    currentQuiz.setAnsweredCorrectly(true);
                 }
 
 
@@ -154,6 +155,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
                     quizScore.incorrectAnswer();
                     quizScore.getIncorrectAnswersList().add(currentQuiz.getCorrectAnswer());
                     firstAnswer = false;
+                    currentQuiz.setAnsweredCorrectly(false);
                 }
 
             }

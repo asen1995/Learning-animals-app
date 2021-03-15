@@ -18,6 +18,16 @@ public class QuizModel {
     private String answer3;
     private String answer4;
 
+    private Boolean answeredCorrectly;
+
+    public Boolean getAnsweredCorrectly() {
+        return answeredCorrectly;
+    }
+
+    public void setAnsweredCorrectly(Boolean answeredCorrectly) {
+        this.answeredCorrectly = answeredCorrectly;
+    }
+
     public Integer getDrawableImageId() {
         return drawableImageId;
     }

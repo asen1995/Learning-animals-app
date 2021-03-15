@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asennikolaev.learninganimals.R;
+import com.asennikolaev.learninganimals.model.QuizGame;
+import com.asennikolaev.learninganimals.model.QuizModel;
 import com.asennikolaev.learninganimals.score.QuizScore;
 import com.asennikolaev.learninganimals.score.ScoreRecyclerViewAdapter;
+
+import java.util.List;
 
 public class ScoreActivity  extends AppCompatActivity {
 
@@ -22,12 +26,16 @@ public class ScoreActivity  extends AppCompatActivity {
 
     private QuizScore quizScore;
 
+    private List<QuizModel> quizGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         quizScore = (QuizScore) getIntent().getSerializableExtra("QuizScore");
 
+
+        this.quizGame = QuizGame.quizModelList;
         Log.i("TAG","score is " + quizScore);
 
         setContentView(R.layout.activity_score);
@@ -49,8 +57,7 @@ public class ScoreActivity  extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        String st[] = {"test","test","test","test","test","test","test","test","test","test","test","test","test","test","test"};
-        ScoreRecyclerViewAdapter scoreRecyclerViewAdapter = new ScoreRecyclerViewAdapter(st);
+        ScoreRecyclerViewAdapter scoreRecyclerViewAdapter = new ScoreRecyclerViewAdapter(this.quizGame);
         recyclerView.setAdapter(scoreRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
