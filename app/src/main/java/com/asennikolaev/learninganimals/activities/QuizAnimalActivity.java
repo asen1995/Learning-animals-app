@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.model.QuizGame;
@@ -18,8 +17,6 @@ import com.asennikolaev.learninganimals.model.QuizModel;
 import com.asennikolaev.learninganimals.score.QuizScore;
 import com.asennikolaev.learninganimals.sound.SoundManager;
 import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
-
-import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -45,6 +42,9 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private boolean correctAnswer;
     private boolean firstAnswer;
 
+    private Drawable greenCorrectButtonGradient;
+    private Drawable redIncorrectButtonGradient;
+
     private void initQuizScreenComponents() {
 
         imageViewQuestion = (ImageView) findViewById(R.id.imageView);
@@ -52,6 +52,13 @@ public class QuizAnimalActivity extends AppCompatActivity {
         buttonAnswer2 = (Button) findViewById(R.id.buttonAnswer2);
         buttonAnswer3 = (Button) findViewById(R.id.buttonAnswer3);
         buttonAnswer4 = (Button) findViewById(R.id.buttonAnswer4);
+
+        defaultButtonColor();
+
+
+        greenCorrectButtonGradient = getResources().getDrawable(R.drawable.gradient_button_correct);
+        redIncorrectButtonGradient = getResources().getDrawable(R.drawable.gradient_button_wrong_answer);
+
 
         righArrorNextQuestion = (Button) findViewById(R.id.buttonArrow);
 
@@ -64,6 +71,12 @@ public class QuizAnimalActivity extends AppCompatActivity {
         System.out.println("initQuizScreenComponents completed");
     }
 
+    private void defaultButtonColor() {
+        buttonAnswer1.setBackgroundColor(Color.LTGRAY);
+        buttonAnswer2.setBackgroundColor(Color.LTGRAY);
+        buttonAnswer3.setBackgroundColor(Color.LTGRAY);
+        buttonAnswer4.setBackgroundColor(Color.LTGRAY);
+    }
 
 
     @Override
@@ -72,6 +85,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_quiz_animal);
         initQuizScreenComponents();
+
 
         Log.i(TAG, "initQuizScreenComponents finished");
 
@@ -133,8 +147,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
             if(isCorrectAnswer(buttonText)){
 
                 soundSystem.playCorrectAnswerSound();
-
-                b.setBackgroundColor(Color.GREEN);
+                b.setBackground(greenCorrectButtonGradient);
                 quizNumber++;
                 showAllButtons();
 
@@ -148,7 +161,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
             }else{
                 soundSystem.playBuzzerd();
-                b.setBackgroundColor(Color.RED);
+                b.setBackground(redIncorrectButtonGradient);
                 ButtonHelperOperations.hideButton(b);
 
                 if(firstAnswer) {
@@ -188,10 +201,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 currentQuiz = QuizGame.quizModelList.get(quizNumber);
                 prepareQuestion(currentQuiz);
 
-                buttonAnswer1.setBackgroundColor(Color.LTGRAY);
-                buttonAnswer2.setBackgroundColor(Color.LTGRAY);
-                buttonAnswer3.setBackgroundColor(Color.LTGRAY);
-                buttonAnswer4.setBackgroundColor(Color.LTGRAY);
+                defaultButtonColor();
 
                 ButtonHelperOperations.hideButton(righArrorNextQuestion);
             }
