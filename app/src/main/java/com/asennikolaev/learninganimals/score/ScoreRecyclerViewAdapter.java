@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,16 +19,25 @@ public class ScoreRecyclerViewAdapter  extends RecyclerView.Adapter<ScoreRecycle
     private List<QuizModel> quizGame;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final TextView animalNameTextView;
+        private final ImageView animalImage;
+
+
 
         public ViewHolder(View view) {
             super(view);
-            textView = (TextView) view.findViewById(R.id.textView);
+            animalNameTextView = (TextView) view.findViewById(R.id.animalNameTextView);
+            animalImage= (ImageView) view.findViewById(R.id.animalImage);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getAnimalNameTextView() {
+            return animalNameTextView;
         }
+
+        public ImageView getAnimalImage() {
+            return animalImage;
+        }
+
     }
 
     public ScoreRecyclerViewAdapter(List<QuizModel> dataSet) {
@@ -50,9 +60,11 @@ public class ScoreRecyclerViewAdapter  extends RecyclerView.Adapter<ScoreRecycle
 
         QuizModel quizModel = this.quizGame.get(position);
         String correctAnswer = quizModel.getCorrectAnswer();
+        Integer drawableImageId = quizModel.getDrawableImageId();
 
         Boolean answeredCorrectly = quizModel.getAnsweredCorrectly();
-        viewHolder.getTextView().setText(correctAnswer + " - " + answeredCorrectly);
+        viewHolder.getAnimalNameTextView().setText(correctAnswer + " - " + answeredCorrectly);
+        viewHolder.getAnimalImage().setImageResource(drawableImageId);
     }
 
     @Override
