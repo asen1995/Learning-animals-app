@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.QuizAnimalActivity">
+        <activity android:name=".activities.QuizAnimalActivity" android:configChanges="keyboardHidden|orientation|screenSize" >
 
         </activity>
 

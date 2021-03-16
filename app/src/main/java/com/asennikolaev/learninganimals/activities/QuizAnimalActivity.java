@@ -3,6 +3,7 @@ package com.asennikolaev.learninganimals.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -228,4 +229,57 @@ public class QuizAnimalActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_quiz_animal);
+
+            changeOrientation();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_quiz_animal_land);
+            changeOrientation();
+        }
+    }
+
+    private void changeOrientation() {
+
+
+        //backup visibility and colors
+        final int visibility1 = buttonAnswer1.getVisibility();
+        final Drawable background1 = buttonAnswer1.getBackground();
+
+        final int visibility2 = buttonAnswer2.getVisibility();
+        final Drawable background2 = buttonAnswer2.getBackground();
+
+        final int visibility3 = buttonAnswer3.getVisibility();
+        final Drawable background3 = buttonAnswer3.getBackground();
+
+        final int visibility4 = buttonAnswer4.getVisibility();
+        final Drawable background4 = buttonAnswer4.getBackground();
+
+        boolean firstAnswerBackUp = this.firstAnswer;
+
+        initQuizScreenComponents();
+
+
+        buttonAnswer1.setVisibility(visibility1);
+        buttonAnswer1.setBackground(background1);
+
+        buttonAnswer2.setVisibility(visibility2);
+        buttonAnswer2.setBackground(background2);
+
+        buttonAnswer3.setVisibility(visibility3);
+        buttonAnswer3.setBackground(background3);
+
+        buttonAnswer4.setVisibility(visibility4);
+        buttonAnswer4.setBackground(background4);
+
+        prepareQuestion(currentQuiz);
+
+        this.firstAnswer = firstAnswerBackUp;
+
+    }
+
 }
