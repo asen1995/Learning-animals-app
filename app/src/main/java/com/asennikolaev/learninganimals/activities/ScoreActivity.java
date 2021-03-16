@@ -46,7 +46,7 @@ public class ScoreActivity  extends AppCompatActivity {
     @Override
         public void onBackPressed() {
 
-        Intent intent = new Intent(ScoreActivity.this, QuizAnimalActivity.class);
+        Intent intent = new Intent(ScoreActivity.this, HomeActivity.class);
         startActivity(intent);
 
         finish();
