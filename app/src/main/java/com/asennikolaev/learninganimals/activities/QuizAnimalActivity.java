@@ -1,5 +1,6 @@
 package com.asennikolaev.learninganimals.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,11 @@ import com.asennikolaev.learninganimals.model.QuizModel;
 import com.asennikolaev.learninganimals.score.QuizScore;
 import com.asennikolaev.learninganimals.sound.SoundManager;
 import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 import static android.content.ContentValues.TAG;
 
@@ -45,6 +51,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private Drawable greenCorrectButtonGradient;
     private Drawable redIncorrectButtonGradient;
+
+    private InterstitialAd mInterstitialAd;
 
     private void initQuizScreenComponents() {
 
@@ -99,6 +107,31 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
 
         playGame();
+
+        loadAdd();
+    }
+
+    private void loadAdd() {
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
+                Log.i(TAG, "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                Log.i(TAG, loadAdError.getMessage());
+                mInterstitialAd = null;
+            }
+        });
+
     }
 
     private void playGame() {
@@ -113,6 +146,12 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private void prepareQuestion(QuizModel currentQuiz) {
 
+
+        if(mInterstitialAd != null){
+            mInterstitialAd.show(this);
+            mInterstitialAd = null;
+            loadAdd();
+        }
         imageViewQuestion.setImageResource(currentQuiz.getDrawableImageId());
 
         buttonAnswer1.setText(currentQuiz.getAnswer1());
