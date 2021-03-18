@@ -18,6 +18,8 @@ import com.asennikolaev.learninganimals.model.QuizGame;
 import com.asennikolaev.learninganimals.model.QuizModel;
 import com.asennikolaev.learninganimals.score.QuizScore;
 import com.asennikolaev.learninganimals.sound.SoundManager;
+import com.asennikolaev.learninganimals.utils.AddManager;
+import com.asennikolaev.learninganimals.utils.AppConstants;
 import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
 
 import com.google.android.gms.ads.AdRequest;
@@ -53,6 +55,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private Drawable redIncorrectButtonGradient;
 
     private InterstitialAd mInterstitialAd;
+    private Integer quizTillNextAdd;
 
     private void initQuizScreenComponents() {
 
@@ -100,6 +103,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         soundSystem = new SoundManager(getApplicationContext());
         quizScore = new QuizScore();
+        quizTillNextAdd = AppConstants.NUMBER_OF_QUIZ_PER_ADD;
 
         QuizGame.initializeNewGame();
 
@@ -111,47 +115,20 @@ public class QuizAnimalActivity extends AppCompatActivity {
         loadAdd();
     }
 
-    private void loadAdd() {
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
-            @Override
-            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                // The mInterstitialAd reference will be null until
-                // an ad is loaded.
-                mInterstitialAd = interstitialAd;
-                Log.i(TAG, "onAdLoaded");
-            }
-
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                // Handle the error
-                Log.i(TAG, loadAdError.getMessage());
-                mInterstitialAd = null;
-            }
-        });
-
-    }
-
     private void playGame() {
 
         currentQuiz = QuizGame.quizModelList.get(0);//first question in the list
+        quizTillNextAdd--;//first question
 
         firstAnswer = true;
         prepareQuestion(currentQuiz);
         quizNumber = 0;
 
+
     }
 
     private void prepareQuestion(QuizModel currentQuiz) {
 
-
-        if(mInterstitialAd != null){
-            mInterstitialAd.show(this);
-            mInterstitialAd = null;
-            loadAdd();
-        }
         imageViewQuestion.setImageResource(currentQuiz.getDrawableImageId());
 
         buttonAnswer1.setText(currentQuiz.getAnswer1());
@@ -189,6 +166,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 soundSystem.playCorrectAnswerSound();
                 b.setBackground(greenCorrectButtonGradient);
                 quizNumber++;
+
                 showAllButtons();
 
                 if(firstAnswer) {
@@ -240,6 +218,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
             }else {
                 currentQuiz = QuizGame.quizModelList.get(quizNumber);
                 prepareQuestion(currentQuiz);
+                checkForAdd();
+                quizTillNextAdd--;
 
                 defaultButtonColor();
 
@@ -248,6 +228,22 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         }
     };
+
+    private void checkForAdd() {
+
+        if(AddManager.isTimeForAdd(quizTillNextAdd) ){
+
+            quizTillNextAdd = AppConstants.NUMBER_OF_QUIZ_PER_ADD;
+
+            if(mInterstitialAd != null){
+                mInterstitialAd.show(this);
+                mInterstitialAd = null;
+                loadAdd();
+            }
+
+        }
+
+    }
 
     private void goToScoringScreen() {
         Intent intent = new Intent(QuizAnimalActivity.this, ScoreActivity.class);
@@ -284,7 +280,6 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     private void changeOrientation() {
 
-
         //backup visibility and colors
         final int visibility1 = buttonAnswer1.getVisibility();
         final Drawable background1 = buttonAnswer1.getBackground();
@@ -299,6 +294,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
         final Drawable background4 = buttonAnswer4.getBackground();
 
         boolean firstAnswerBackUp = this.firstAnswer;
+
+        Integer quizTillNextAddBackUp =  this.quizTillNextAdd;
 
         initQuizScreenComponents();
 
@@ -318,6 +315,34 @@ public class QuizAnimalActivity extends AppCompatActivity {
         prepareQuestion(currentQuiz);
 
         this.firstAnswer = firstAnswerBackUp;
+
+        this.quizTillNextAdd = quizTillNextAddBackUp;
+
+    }
+
+
+    private void loadAdd() {
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
+                Log.i(TAG, "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                Log.i(TAG, loadAdError.getMessage());
+                Log.i(TAG, "onAdFailedToLoad - call loadAdd again");
+                mInterstitialAd = null;
+                loadAdd();
+            }
+        });
 
     }
 
