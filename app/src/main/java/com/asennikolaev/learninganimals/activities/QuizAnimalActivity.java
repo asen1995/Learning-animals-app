@@ -293,6 +293,11 @@ public class QuizAnimalActivity extends AppCompatActivity {
         final int visibility4 = buttonAnswer4.getVisibility();
         final Drawable background4 = buttonAnswer4.getBackground();
 
+        final int visibilityrighArrorNextQuestion = righArrorNextQuestion.getVisibility();
+        final Drawable backgroundrighArrorNextQuestion = righArrorNextQuestion.getBackground();
+
+
+
         boolean firstAnswerBackUp = this.firstAnswer;
 
         Integer quizTillNextAddBackUp =  this.quizTillNextAdd;
@@ -311,6 +316,9 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         buttonAnswer4.setVisibility(visibility4);
         buttonAnswer4.setBackground(background4);
+
+        righArrorNextQuestion.setVisibility(visibilityrighArrorNextQuestion);
+        righArrorNextQuestion.setBackground(backgroundrighArrorNextQuestion);
 
         prepareQuestion(currentQuiz);
 
