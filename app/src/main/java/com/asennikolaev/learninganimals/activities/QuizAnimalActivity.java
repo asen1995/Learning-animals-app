@@ -95,7 +95,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_quiz_animal);
+        initScreen();
+
         initQuizScreenComponents();
 
 
@@ -114,6 +115,17 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         loadAdd();
     }
+
+    private void initScreen() {
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_quiz_animal_land);
+        }else{
+            setContentView(R.layout.activity_quiz_animal);
+        }
+
+    }
+
 
     private void playGame() {
 
