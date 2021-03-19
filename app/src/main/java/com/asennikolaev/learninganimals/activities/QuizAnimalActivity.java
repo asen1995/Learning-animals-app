@@ -3,6 +3,7 @@ package com.asennikolaev.learninganimals.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -95,7 +96,10 @@ public class QuizAnimalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_quiz_animal);
+        initScreen();
+
+
+
         initQuizScreenComponents();
 
 
@@ -113,6 +117,16 @@ public class QuizAnimalActivity extends AppCompatActivity {
         playGame();
 
         loadAdd();
+    }
+
+    private void initScreen() {
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_quiz_animal_land);
+        }else{
+            setContentView(R.layout.activity_quiz_animal);
+        }
+
     }
 
     private void playGame() {
