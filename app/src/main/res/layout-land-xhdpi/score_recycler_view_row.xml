@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/animalNameTextView"
+        android:layout_width="260dp"
+        android:layout_height="97dp"
+        android:layout_marginLeft="238dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="98dp"
+        android:text="text"
+        android:textColor="@color/White"
+        android:textSize="55dp" />
+
+    <ImageView
+        android:id="@+id/animalImage"
+        android:layout_width="223dp"
+        android:layout_height="223dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="98dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/checkOrXImageView"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="515dp"
+        android:layout_marginTop="54dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+</FrameLayout>
