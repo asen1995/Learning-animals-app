@@ -27,7 +27,7 @@
 
     <ImageView
         android:id="@+id/checkOrXImageView"
-        android:layout_width="79dp"
+        android:layout_width="73dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="638dp"
         android:layout_marginTop="54dp"
