@@ -25,7 +25,7 @@
         android:layout_width="286dp"
         android:layout_height="55dp"
 
-        android:text="New game xxxhdpi"
+        android:text="New game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
