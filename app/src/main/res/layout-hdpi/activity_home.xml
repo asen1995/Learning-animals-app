@@ -5,54 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".activities.HomeActivity">
+    tools:context=".activities.HomeActivity"><![CDATA[
+
+    " />
+
+
+
+    ]]>
 
     <ImageView
         android:id="@+id/imageHomeView"
-        android:layout_width="204dp"
-        android:layout_height="166dp"
-        android:layout_marginStart="58dp"
-        android:layout_marginLeft="58dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="58dp"
-        android:layout_marginRight="58dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="231dp"
+        android:layout_height="191dp"
+
         android:contentDescription="home screen"
         android:src="@drawable/homescreentext"
-        app:layout_constraintBottom_toTopOf="@+id/newGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095" />
+
+    <Button
+        android:id="@+id/newGame"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
+
+        android:text="New game hdpi"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/newGame"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="66dp"
-        android:layout_marginRight="66dp"
-        android:layout_marginBottom="18dp"
-        android:text="New game hdpi"
-        app:layout_constraintBottom_toTopOf="@+id/closeApp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageHomeView" />
-
-    <Button
         android:id="@+id/closeApp"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="66dp"
-        android:layout_marginRight="66dp"
-        android:layout_marginBottom="210dp"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
+
         android:text="Exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGame" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
 </androidx.constraintlayout.widget.ConstraintLayout>
