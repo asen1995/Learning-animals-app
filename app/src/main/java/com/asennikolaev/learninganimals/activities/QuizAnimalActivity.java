@@ -251,6 +251,8 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 mInterstitialAd.show(this);
                 mInterstitialAd = null;
                 loadAdd();
+            }else {
+                loadAdd();
             }
 
         }
@@ -360,7 +362,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
                 Log.i(TAG, loadAdError.getMessage());
                 Log.i(TAG, "onAdFailedToLoad - call loadAdd again");
                 mInterstitialAd = null;
-                loadAdd();
+             //   loadAdd(); remove recursion request loop
             }
         });
 
