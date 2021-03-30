@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.asennikolaev.learninganimals.R;
 import com.asennikolaev.learninganimals.model.QuizGame;
+import com.asennikolaev.learninganimals.utils.AddManager;
 import com.asennikolaev.learninganimals.utils.ButtonHelperOperations;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -28,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
 
         initScreenComponents();
 
+
+        AddManager.resetFailCounter();
         //Initialize the Mobile Ads SDK
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override

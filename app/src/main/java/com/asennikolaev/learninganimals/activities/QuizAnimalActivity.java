@@ -54,7 +54,6 @@ public class QuizAnimalActivity extends AppCompatActivity {
     private Drawable greenCorrectButtonGradient;
     private Drawable redIncorrectButtonGradient;
 
-    private InterstitialAd mInterstitialAd;
     private Integer quizTillNextAdd;
 
     private void initQuizScreenComponents() {
@@ -113,7 +112,7 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
         playGame();
 
-        loadAdd();
+        AddManager.loadAdd(this);
     }
 
     private void initScreen() {
@@ -247,12 +246,11 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
             quizTillNextAdd = AppConstants.NUMBER_OF_QUIZ_PER_ADD;
 
-            if(mInterstitialAd != null){
-                mInterstitialAd.show(this);
-                mInterstitialAd = null;
-                loadAdd();
+            if(AddManager.isAddAvailable()){
+                AddManager.showAdd(this);
+                AddManager.loadAdd(this);
             }else {
-                loadAdd();
+                AddManager.loadAdd(this);
             }
 
         }
@@ -342,30 +340,5 @@ public class QuizAnimalActivity extends AppCompatActivity {
 
     }
 
-
-    private void loadAdd() {
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
-            @Override
-            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                // The mInterstitialAd reference will be null until
-                // an ad is loaded.
-                mInterstitialAd = interstitialAd;
-                Log.i(TAG, "onAdLoaded");
-            }
-
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                // Handle the error
-                Log.i(TAG, loadAdError.getMessage());
-                Log.i(TAG, "onAdFailedToLoad - call loadAdd again");
-                mInterstitialAd = null;
-             //   loadAdd(); remove recursion request loop
-            }
-        });
-
-    }
 
 }
