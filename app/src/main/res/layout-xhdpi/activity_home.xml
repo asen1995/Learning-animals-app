@@ -19,7 +19,7 @@
         android:layout_height="249dp"
 
         android:contentDescription="home screen"
-        android:src="@drawable/homescreentext"
+        android:src="@drawable/finalspanishscreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
