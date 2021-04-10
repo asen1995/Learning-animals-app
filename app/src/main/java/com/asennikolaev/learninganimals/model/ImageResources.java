@@ -54,11 +54,11 @@ public class ImageResources {
         imageAnswerMap.put(R.drawable.butterfly, "mariposa");
         imageAnswerMap.put(R.drawable.kangaroo, "canguro");
         imageAnswerMap.put(R.drawable.elephant, "elefante");
-        imageAnswerMap.put(R.drawable.bear, "soportar");//?
+        imageAnswerMap.put(R.drawable.bear, "oso");
         imageAnswerMap.put(R.drawable.penguin, "Pingüino");
         imageAnswerMap.put(R.drawable.rhino, "rinoceronte");
         imageAnswerMap.put(R.drawable.lion, "león");
-        imageAnswerMap.put(R.drawable.tiger, "tiger");
+        imageAnswerMap.put(R.drawable.tiger, "tigre");
         imageAnswerMap.put(R.drawable.crocodile, "cocodrilo");
         imageAnswerMap.put(R.drawable.turtle, "tortuga");
         imageAnswerMap.put(R.drawable.chameleon, "camaleón");
